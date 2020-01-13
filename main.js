@@ -6,7 +6,7 @@ phina.globalize(); // おまじない(phina.jsをグローバルに展開)
 
 
 // 定数
-const RECTANGLE_DIAMETER = 60; // 正方形のの半径
+const RECTANGLE_DIAMETER = 60; // 正方形の一辺の長さ
 const DISPLAY_WIDTH = 640; // ゲーム画面の横幅
 const DISPLAY_HEIGHT = 960; // ゲーム画面の縦幅
 
@@ -27,9 +27,10 @@ phina.define('Rec', {
         this.width = RECTANGLE_DIAMETER; //四角の縦幅
         this.height = RECTANGLE_DIAMETER; //四角の横幅
 
-        this.setInteractive(true);
+        //四角をクリックできるようにする
+        this.setInteractive(true); //四角をクリック可能に
 
-        this.onpointstart = () => {
+        this.onpointstart = () => { //クリックが始まった瞬間の処理
             SCORE += 1; //スコアを1追加
             this.remove();
         };
@@ -72,17 +73,17 @@ phina.define('scoreLabel', {
     init: function(options) {
         this.superInit(); //初期化のおまじない
 
-        this.text = "0";
-        this.fontsize = 64;
-        this.x = DISPLAY_WIDTH / 2;
-        this.y = DISPLAY_HEIGHT - (DISPLAY_HEIGHT / 9);
-        this.fill = '#111';
+        this.text = "0"; //最初のtextは 0
+        this.fontsize = 64; //フォントの大きさ
+        this.x = DISPLAY_WIDTH / 2; //表示位置(x座標)
+        this.y = DISPLAY_HEIGHT - (DISPLAY_HEIGHT / 9); //表示位置(y座標)
+        this.fill = '#111'; //文字の色
     },
 
 
     //毎フレームごとに、どうふるまうか
     update: function(app) {
-        this.text = SCORE;
+        this.text = SCORE; //textに現在のSCOREを代入
     }
 });
 
@@ -104,8 +105,6 @@ phina.define("MainScene", {
 
         // グループを生成
         this.recGroup = DisplayElement().addChildTo(this);
-
-        console.log(this.scoreString);
     },
 
 
